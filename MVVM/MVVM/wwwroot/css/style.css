@@ -1,0 +1,43 @@
+﻿body 
+{
+    background-color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+    text-align: justify;
+}
+
+h1
+{
+    color: darkmagenta;
+}
+
+h2
+{
+    color: deeppink;
+}
+
+h3
+{
+    color: goldenrod;
+}
+
+img
+{
+    margin-left: 10%;
+
+    width: auto;
+    height: auto;
+}
+
+#imagen
+{
+    width: auto;
+    height: auto;
+    position: static;
+    
+}
+
+li
+{
+    text-align: left;
+}

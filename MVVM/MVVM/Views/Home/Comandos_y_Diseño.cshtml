@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewData["Title"] = "Comandos_y_Diseño";
+
+}
+
+
+<nav style="padding: 40px;">
+    
+    <div class="row">
+        <div class="col-md-12">
+            <center>
+                <br /><img src="~/images/Diseño de Vista.png" alt="Diseño de Vista" class="img-responsive" /><br />
+            </center>
+            <h2 class="text-center"><b>Comandos Principales de MVVM y Diseño de Interfaces</b></h2>
+        </div>
+        <br /><br />
+        <div class="col-md-6">
+            <h3 class="text-center"><b>Comandos y Parámetros MVVM</b></h3><br />
+            <p class="text-justify">
+                Los comandos estan agregados al <b>patrón MVVM</b> esto permite manejar los eventos desde el ViewModel(VM). Creamos
+                un programa en el cual vamos añadir o eliminar Elipses, despues creamos un VM como puntos de tipo Points,estos elipses
+                serán dibujadas en un ItemsControl en el cual lo llamaremos Contenedor y el cuál almacenaremos un control contenedor
+                (Canvas), despues se dibujarán los puntos usando los valores de X y Y que nos suministre el punto del VM.
+            </p>
+            <h4><b>ObservableCollection de Points.</b></h4>
+            <p class="text-justify">
+                Representa una colección de datos dinámicos que nos proporciona al agregar o quitar elementos, tambien cuando  se actualiza la
+                lista completa.
+            </p>
+            <center>
+                <img src="~/images/comando 1.png" alt="comando 1" class="img-responsive" width="80%" />
+            </center>
+
+            <h4><b>RelayCommand de Josh Smith.</b></h4>
+            <p class="text-justify">
+                El comando Agregar se activa mientras la lista de puntos sea menor a 100 (en la función canAdd), con respecto a
+                addPoint se muestra que debemos convertir nuestro parámetro como un ItemsControl, y si lo logra  convertir
+                creamos 2 valores double para nuestro punto usando Random entre 0 y el tamaño actual (ya sea Ancho o Alto) y luego
+                añadimos punto a PointList.
+            </p>
+            <center>
+                <img src="~/images/comando 2.png" alt="comando 2" class="img-responsive" width="80%" />
+            </center>
+
+            <h4><b>Eliminar</b></h4>
+            <p class="text-justify">
+                Su funcion es igual al comando agregar pero lo que cambia que el comando Eliminar es bastante sencillo, se activa
+                mientras PointList tenga puntos y removePoint borra un punto aleatoriamente usando Random entre 0 y la lista completa.
+            </p>
+            <center>
+                <img src="~/images/comando 3.png" alt="com,ando 3" class="img-responsive" width="80%" />
+            </center>
+
+            <h4><b>Diferencia</b></h4>
+            <p class="text-justify">
+                Su diferencia <b>RelayCommand de Josh  Smith,</b> podemos aplicar <b>el patrón MVVM de forma completa</b> a diferencia
+                del <b>RoutedCommand y RoutedEvents,</b> que hacen uso del code-behind no es necesario aplicar <b>el patrón MVVM.</b>
+            </p>
+            <h4><b>EL Xaml</b></h4>
+            <center>
+                <img src="~/images/comando 4.png" alt="comando 4" class="img-responsive" width="80%" />
+            </center>
+            <p class="text-justify">
+                Creamos un ItemsControl cuyo contenedor (ItemsPanel) es un Canvas el cual pintará Elipses de 25 x 25 de color
+                Negro, las cuáles se dibujarán usando las coordenadas X y Y tomando como referencia la esquina superior izquierda
+                como base.
+            </p>
+            <h4><b>Ejemplo</b></h4>
+            <center>
+                <img src="~/images/ejemplo.png" alt="ejemplo" class="img-responsive" width="80%" />
+            </center>
+
+            <h4><b>Interfaz Icommand</b></h4>
+            <p class="text-justify">
+                La Interfaz Icommand ya esta definida:
+            </p>
+            <img src="~/images/Interfaz 1.png" alt="interfaz 1" class="img-responsive" />
+            <p class="text-justify">
+                Su uso es crear una clase llamada <b>GenerarEditorIdCommand,</b> que hereda de dicha interfaz.
+            </p>
+            <center>
+                <img src="~/images/Interfaz 2.png" alt="interfaz 2" class="img-responsive" width="100%" />
+            </center>
+        </div>
+
+
+
+
+        <div class="col-md-6">
+            <p class="text-justify">
+                <br /><br /><br /><br />
+                El método <b>canExecute,</b> devolverá true solo cuando reciba un objeto de tipo <b>DatosEditores</b> El valor devuelto
+                determina si el control de la UI que esta enlazado al comando que esta activado o no y estos nos permite que el comando pueda o no ser ejecutado.<br />
+
+                El método <b>Execute,</b> lo que hará será ejecutar el Código correspondiente asociada al comando que se a utilizado, y
+                esto consiste que debe buscar, en la tabla Editores de la base de datos, el id correspondiente a la siguiente inserción
+                de un registro de dicha tabla y se lo asigna a la propiedad EditorId de la instancia de tipo DatosEditores recibida como
+                parámetro.
+            </p>
+            <p class="text-justify">
+                La implementacion al evento <b>CanExecuteChaged,</b> en otra propiedad de evento, debemos incluir sus accesores que seria <b>add y remove.</b>
+                En los accesores, solo agregamos o eliminamos el comando de la lista gestionada por el manejador de comandos <b>CommandManager.</b>  El manejador
+                de comandos, llama al método <b>CanExecute</b> cuando algún objeto o propiedad, que sea determinantes para su resultado, cambia el valor.
+            </p><br />
+            <p class="text-justify">
+                <b>GenerarEditorIdCommand</b> en una aplicación, debemos implementar un modelo de vista de una propiedad.
+            </p>
+            <img src="~/images/Interfaz 3.png" alt="interfaz 3" class="img-responsive" />
+            <p class="text-justify">
+                Para su funcion del comando, debemos incluir en el marcado XAML un control (tipo Button) enlazado a la propiedad del modelo de vista GenerarEditorIdCmd.
+            </p>
+            <img src="~/images/Interfaz 4.png" alt="interfaz 4" class="img-responsive" />
+            <p class="text-justify">
+                El modelo vista ya esta asignado al contexto de Datos llamado también (DataContex) en cual un control de tipo Grid (mainGrid) donde se encuentra otros controles,
+                como el botón BtnGenerarIdEditor.
+            </p>
+            <h3 class="text-center"><b></b></h3>
+            <center>
+                <h3><b>Diseño De Interfaces</b></h3>
+            </center><br />
+            <p class="text-justify">
+                La vista está vinculada a las propiedades de ViewModel, que muestra los datos de sus contenidos con el objeto del modelo y los demas estados, que ya esta asignados a la vista.
+                El enlace entre View y ViewModel su construcción es muy fácil, porque el objeto ViewModel se establece como el DataContext de una vista. Si cambiamos los valores de la propiedad,
+                los nuevos valores se genera automáticamente a la vista a través de enlace de datos. Si el usuario presiona un clic en un botón de la vista, el comando del modelo de vista se
+                ejecuta con un comportamiento solicitado por el usuario. ViewModel realiza todas las modificaciones de datos del modelo.
+                La clase View no reconoce la existencia de la clase modelo y ni ViewModel, ni Model conocen la vista. Por tanto, Model olvida por completo de que ViewModel y View existen.
+            </p>
+            <img src="~/images/Diseño1.png" alt="Diseño1" class="img-responsive" width="100%"><br />
+            <p class="text-justify">
+                Se crea la capa view que hacen uso de html , y para darle estilo se ocupa el css y funcionalidad se implementa con el js.
+            </p><br />
+            <img src="~/images/Diseño2.png" alt="Diseño2" class="img-responsive" width="140%" /><br />
+            <h4><b>View</b></h4>
+            <p class="text-justify">
+                La vista define su estructura, el diseño y la apariencia donde el usuario visualiza su pantalla. La vista también se define XAML con un código subyacente. Pero el código subyacente
+                podría contener lógica en su interfaz por el usuario que implementa y un comportamiento visual.
+            </p><br />
+            <p class="text-justify">
+                Para una vista suele ser page que seria una clase derivada de ContentView. Pero las vistas también se pueden representar mediante una plantilla de datos,
+                cada elemento de la interfaz que el usuario usaran para representar visualmente un objeto y después mostrarlo. Para la plantilla de datos de vista no tiene el código subyacente por que
+                ya esta diseñada para enlazarse a un tipo de modelo de vista especifica.
+            </p>
+            <img src="~/images/diseño3.jpg" alt="Diseño3" class="img-responsive" width="120%" /><br />
+            <h4><b>Conexión de ViewModel con  las vistas</b></h4>
+            <p class="text-justify">
+                Su enfoque está en dos categorías, como ver la primera composición
+                del modelo y también ver la primera composición del modelo que es un problema de preferencia. Los enfoques comparten el mismo objetivo, y la vista debe tener un modelo de vista asignado a
+                su propiedad BindingContext.
+            </p><br />
+            <p class="text-justify">
+                Para la primera composición de la vista, la aplicación se compone de vistas en las que se conectan a los modelos de vista. Su principal ventaja de este enfoque que será más fácil la construcción
+                de aplicaciones de prueba unitarias de acoplamiento flexible, porque los modelos de vista no dependen de las propias vistas. Y su estructura es también fácil de comprender en las aplicaciones siempre
+                siguiendo su estructura visual para no realizar un seguimiento de la ejecución de los códigos y comprender como se crean y asocian las clases. Su construcción se alinea con el sistema de navegación para
+                construir páginas.
+            </p><br />
+            <center>
+                <h4><b>Interacción de la interfaz de Usuario mediante Comandos y Comportamientos</b></h4>
+            </center>
+            <img src="~/images/diseño4.jpg" alt="Diseño4" class="img-responsive" /><br />
+            <p class="text-justify">
+                Los comandos representan acciones donde se pueden enlazar a controles en la interfaz del usuario. Guardar el código que implementa la acción y esto nos ayudan a mantenerlo separado de su representación
+                visual en la vista.
+            </p><br />
+            <p class="text-justify">
+                Los comportamientos también permiten que los controles se conecten mediante declaración a un comando. Además, los comportamientos se pueden usar para pedir una acción asociada un intervalo de eventos que
+                se genera por un control. Los comportamientos también se pueden usar para unir objetos de comandos o métodos con controles que no se diseñaron para interactuar con los demás comandos.
+            </p><br />
+            <img src="~/images/diseño5.png" alt="Diseño5" class="img-responsive" width="140%" /><br />
+        </div>
+    </div><br />
+</nav>

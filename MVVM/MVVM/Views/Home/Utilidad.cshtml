@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewData["Title"] = "Area y utilidad";
+
+}
+
+<nav style="padding: 40px;">
+    <br /><img src="~/images/banner2.png" alt="banner" class="img-responsive center-block" /><br />
+    <h1>Patrones MVVM</h1>
+    <p class="text-justify">
+        Cuando estamos creando una aplicación, a todos nos gustaría tener nuestro código limpio y organizado,
+        para que cualquier otro desarrollador tenga una más rápida comprensión del mismo.
+        Es aquí en donde entran en juego los patrones de diseño. ¿Pero exactamente por qué lo usamos?
+        Los patrones de diseño nos ofrecen una arquitectura y un conjunto de reglas/principios
+        definidos previamente que deben de ser cumplidos en nuestra App
+    </p><br/>
+    <img src="~/images/que-es.png" class="center-block img-responsive" /><br />
+    <p class="text-justify">Enumeramos algunas caracteristics mas importantes que se obtinen al usar patrones de diseño:</p>
+    <ul class="text-justify">
+        <li>Código más limpio y organizado.</li>
+        <li>Mayor claridad y mejor comprensión del proyecto frente a otros desarrolladores.</li>
+        <li>Reutilización de código</li>
+        <li>Mantenimiento más rápido</li>
+    </ul>
+    <p class="text-justify">Hablaremos sobre los 3 patrones con los cuales cuenta MVVM.</p><br />
+    <h2>RelayCommand y RelayCommand</h2>
+    <p class="text-justify">
+        RelayCommand y RelayCommand<T>
+        son implementaciones que pueden exponer un método o delegar en la vista.
+        Estos tipos actúan como una forma de enlazar comandos entre los elementos viewmodel y UI.ICommand
+    </p><br />
+    <h3>Cómo funcionan</h3>
+    <p class="text-justify"> RelayCommand y tiene las siguientes características principales:RelayCommand<T></p>
+    <ul class="text-justify">
+        <li>Proporcionan una implementación base de la interfaz.ICommand</li>
+        <li>También implementan la interfaz IRelayCommand (e IRelayCommand<T>),que expone un método para generar el evento.NotifyCanExecuteChangedCanExecuteChanged</li>
+        <li>Exponen constructores que toman delegados como y , que permiten el empaquetado de métodos estándar y expresiones lambda.ActionFunc<T></li>
+    </ul><br />
+    <h3>Trabajar con ICommand</h3>
+    <p class="text-justify">
+        A continuación se muestra cómo configurar un comando simple: <br /> <br />
+        <img src="~/images/relay.png" class="center-block img-responsive" /><br /><br />
+        Y la interfaz de usuario relativa podría ser entonces.<br /><br />
+        <img src="~/images/relayhtm.png" class="center-block img-responsive" />
+    </p><br />
+    <p class="text-justify">
+        Se enlaza al en el modelo de vista, que ajusta el método privado.
+        Muestra el valor de la propiedad y se actualiza cada vez que cambia el valor de la propiedad.ButtonICommandIncrementCounterTextBlockCounter
+    </p><br />
+    <h3>Ejemplos</h3>
+    <p class="text-justify">
+        Consulte  de <a href="https://github.com/CommunityToolkit/MVVM-Samples" target="_blank" />la aplicación</a>
+        (para varios marcos de interfaz de usuario) para ver el kit de herramientas de MVVM en acción.<br />
+        También puede encontrar más ejemplos en las
+        <a href="https://github.com/CommunityToolkit/WindowsCommunityToolkit/tree/rel/7.1.0/UnitTests/UnitTests.Shared/Mvvm" target="_blank">pruebas unitarias</a>.
+    </p> <br />
+    <h2>AsyncRelayCommand y AsyncRelayCommand<T></h2>
+    <p class="text-justify">
+        AsyncRelayCommand y AsyncRelayCommand<T> son implementaciones que amplían las funcionalidades ofrecidas por RelayCommand,con soporte para operaciones asincrónicas.ICommand
+    </p> <br />
+    <h3>Cómo funcionan</h3>
+    <p class="text-justify">
+        AsyncRelayCommand y tienen las siguientes características principales:AsyncRelayCommand<T>
+    </p>
+    <ul class="text-justify">
+        <li>Amplían las funcionalidades de los comandos sincrónicos incluidos en la biblioteca, con soporte para delegados -returning.Task</li>
+        <li>
+            Pueden envolver funciones asincrónicas con un parámetro adicional para admitir la cancelación, y exponen a y propiedades,
+            así como un método.CancellationTokenCanBeCanceledIsCancellationRequestedCancel.
+        </li>
+        <li>
+            Exponen una propiedad que se puede usar para supervisar el progreso de una operación pendiente y una que se puede usar
+            para comprobar cuándo se completa una operación. Esto es particularmente útil para enlazar un comando a elementos de la interfaz de usuario,
+            como los indicadores de carga.ExecutionTaskIsRunning.
+        </li>
+        <li>
+            Implementan las interfaces IAsyncRelayCommand e IAsyncRelayCommand<T>
+                , lo que significa que viewmodel puede exponer
+                fácilmente comandos usando estos para reducir el acoplamiento estrecho entre tipos. Por ejemplo, esto hace que sea más fácil reemplazar
+                un comando con una implementación personalizada que exponga la misma superficie de API pública, si es necesario.
+        </li>
+    </ul> <br />
+    <h3>Trabajar con comandos asincrónicos</h3>
+    <p class="text-justify">Imaginemos un escenario similar al descrito en el ejemplo, pero un comando ejecutando una operación asincrónica:RelayCommand</p>
+    <br /><img src="~/images/asincrono.png" class="center-block img-responsive" /> <br />
+    <p class="text-justify">Con el código de interfaz de usuario relacionado:</p> <br />
+    <img src="~/images/asincronohtm.png" id="imagen" class="center-block img-responsive" /> <br />
+    <p class="text-justify">
+        Al hacer clic en el , se invoca el comando y se actualiza.
+        Cuando se completa la operación, la propiedad genera una notificación que se refleja en la interfaz de usuario.
+        En este caso, se muestran tanto el estado de la tarea como el resultado actual de la tarea.
+        Tenga en cuenta que para mostrar el resultado de la tarea, es necesario utilizar el método:
+        esto proporciona acceso al resultado de una tarea que aún no se ha completado sin bloquear el subproceso
+        (y posiblemente causando un interbloqueo).ButtonExecutionTaskTaskExtensions.GetResultOrDefault
+    </p> <br />
+    <h3>Ejemplos</h3>
+    <p class="text-justify">
+        Consulte la <a href="https://github.com/CommunityToolkit/MVVM-Samples">aplicacion de ejemplo</a>(para varios marcos de interfaz de usuario) para ver el kit de herramientas de MVVM en acción..<br />
+        También puede encontrar más ejemplos en las <a href="https://github.com/CommunityToolkit/WindowsCommunityToolkit/tree/rel/7.1.0/UnitTests/UnitTests.Shared/Mvvm">pruebas unitarias</a>
+    </p>
+</nav>
+
+
+

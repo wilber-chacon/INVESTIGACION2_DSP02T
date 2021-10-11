@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewData["Title"] = "MVC y MVVM";
+}
+
+
+<nav style="padding: 40px;">
+
+    <div class="row">
+        <div class="col-md-12">
+            <br /><img src="~/images/banner.png" alt="Banner" class="img-responsive" /><br />
+            <h2 class="text-center">¿Qué es MVC y MVVM?</h2>
+        </div><br /><br />
+
+        <div class="col-md-6">
+            <h3 class="text-center">MVC (Modelo Vista Controlador)</h3>
+            <p class="text-justify">
+                Modelo Vista Controlador es una arquitectura del software utilizada para separar el código por sus distintas
+                responsabilidades, manteniendo distintas capas que se encargan de hacer una tarea muy concreta, lo que ofrece
+                beneficios diversos. Es decir que separa la interfaz de usuario, y la lógica de negocio en tres componentes
+                distintos. Cuando la lógica de negocio realiza un cambio, es necesario que ella sea la que actualiza la vista.
+            </p>
+            <p class="text-justify">
+                Esta surge basada en la necesidad de crear software más robusto con un ciclo de vida más adecuado, donde se
+                potencie la facilidad de mantenimiento, reutilización del código y la separación de conceptos. A continuación,
+                se presenta cada una de sus partes:
+            </p><br />
+
+            <img src="~/images/mvc.png" alt="MVC" class="img-responsive" /><br />
+
+            <h4>Modelo</h4>
+            <p class="text-justify">
+                Es la capa donde se trabaja con los datos, por tanto, contendrá mecanismos para acceder a la información y
+                también para actualizar su estado. Los datos los tendremos habitualmente en una base de datos, por lo que
+                en los modelos tendremos todas las funciones que accederán a las tablas y harán los correspondientes selects,
+                updates, inserts, etc.
+            </p><br />
+            <h4>Vista</h4>
+            <p class="text-justify">
+                Como su nombre lo indica, es la capa donde se encuentran las interfaces por las que el usuario podrá interactuar
+                con el sistema, estas a su vez contienen el código que va a producir la visualización de las interfaces de usuario,
+                o sea, el código que nos permitirá renderizar los estados de nuestra aplicación en HTML. En las vistas nada más
+                tenemos los códigos HTML y PHP (si es necesario) que nos permite mostrar la salida, no se debe colocar código que
+                pertenezca a la lógica de negocio, ya que eso se realiza en la capa de controladores.
+            </p><br />
+            <h4>Controlador</h4>
+            <p class="text-justify">
+                En esta capa se coloca el código necesario para responder a las acciones que se solicitan en la aplicación, como
+                visualizar un elemento, realizar comparaciones, una búsqueda de información, etc.
+            </p>
+            <p class="text-justify">
+                Básicamente sirve de enlace entre las vistas y los modelos, respondiendo a los mecanismos que puedan requerirse
+                para implementar las necesidades de nuestra aplicación, es decir, que solo funciona como intermediario para
+                mostrar los datos obtenidos de los modelos y pasarlos a mostrar en las vistas. Sin embargo, su responsabilidad
+                no es manipular directamente datos, ni mostrar ningún tipo de salida, sino servir de enlace entre los modelos
+                y las vistas para implementar las diversas necesidades del desarrollo.
+            </p>
+        </div>
+
+        <div class="col-md-6">
+            <h3 class="text-center">MVVM (Modelo Vista Vista de Modelo)</h3>
+            <p class="text-justify">
+                EL patrón de diseño Modelo, Vista, Vista de modelo fue desarrollado por Microsoft alrededor del año 2004;
+                este tiene como objetivo separar la lógica de negocios con la interfaz de usuario, facilitando las pruebas,
+                el mantenimiento, permite generar código más reutilizable y crea enlace de datos complejo. Este patrón
+                proporciona un mejor flujo de trabajo entre el diseñador y el desarrollador gracias la separación, mejorando
+                la simplicidad del trabajo. Existen tres componentes que nos ayudan a lograrlo los cuales son:
+            </p><br />
+
+            <img src="~/images/mvvm.png" alt="MVVM" class="img-responsive" /><br />
+
+            <h4>Modelo</h4>
+            <p class="text-justify">
+                Esta capa tiene la misma funcionalidad que la de MVC, es aquí donde se trabajan los datos de la aplicación
+                estableciendo formas para acceder a la información y para actualizarla. Aquí es donde se realiza una conexión
+                con la base de datos de la aplicación, también se crean los comandos para insertar, consultar, actualizar y
+                eliminar la información.
+            </p><br />
+
+            <h4>Vista</h4>
+            <p class="text-justify">
+                Esta capa contiene las interfaces con las que el usuario podrá interactuar con la aplicación y presentar los datos.
+                Estas hacen la solicitud a la capa ViewModel para que esta también la pida a la capa modelo, luego los resultados se
+                pasan al ViewModel para finalmente lleguen a la vista.
+            </p><br />
+
+            <h4>Vista de Modelo</h4>
+            <p class="text-justify">
+                Esta capa no conoce directamente a la vista, sino que la comunicación entre estas se realiza a través de alguna
+                propiedad y enlace. Los modelos están conectados directamente al ViewModel e invocan un método por la clase del
+                modelo, sabe lo que tiene el modelo, como propiedades, métodos, etc. y también es consciente de lo que necesita
+                la vista. Es decir que una ventana de la capa vista se conecta a un ViewModel para solicitar la información que se
+                sustrae en la capa de modelo y asi poder presentar los datos.
+            </p><br />
+
+        </div>
+
+
+    </div><br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Diferencias entre MVC y MVVM</h3>
+            <p class="text-justify">
+                Apresar de que ambos patrones de diseño tienen cosas en común como, por ejemplo, que los dos permiten
+                crear un desarrollo simultaneo de diseño y programación; también poseen diferencias como lo es que,
+                para el patrón MVC la capa del controlador es la pieza central que funciona como intermediario entre
+                el modelo y la vista, este ejecuta las peticiones del usuario para solicitar los datos al modelo y
+                efectuar un cambio en las vistas. Es decir que este realiza los eventos de interacción con el usuario,
+                además, la vista no tiene referencia directa con el controlador.
+            </p>
+
+            <p class="text-justify">
+                Mientas que el patrón MVVM por su parte, funciona de una manera un poco diferente ya que la capa de
+                ViewModel no contiene controladores como tal, pero actúa como una carpeta que une datos entre la vista
+                y el modelo. Mientras que el patrón MVC está diseñado específicamente para crear una separación de
+                preocupaciones entre el modelo y la vista, el formato MVVM con enlace de datos está diseñado
+                específicamente para permitir que la vista y el modelo se comuniquen directamente entre sí, también
+                se encuentra un binder el cual sincroniza la información en vez de hacerlo un controlador como es el
+                caso de MVC. Otra diferencia es que MVVM permite hacer pruebas unitarias para el modelo y para
+                vista-modelo, sin necesidad de hacer referencia a la vista, además permite reutilizar porciones de código.
+            </p>
+
+        </div>
+    </div>
+</nav>
